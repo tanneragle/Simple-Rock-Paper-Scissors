@@ -1,3 +1,11 @@
+// GLOBAL Functions
+
+    // Function for proper formating of output
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+
 // START Game Function "playGame"
 function playGame() {
 
@@ -28,11 +36,6 @@ function playGame() {
 
         // CALCULATE round result
         let result = (humanChoice - computerChoice + 3) % 3;
-
-        // Function for proper formating of results
-        function capitalizeFirstLetter(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        }
 
         // OUTPUT Choices
         console.log(`You chose: ${capitalizeFirstLetter(choices[humanChoice])}!`);
