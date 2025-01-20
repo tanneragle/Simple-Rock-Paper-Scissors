@@ -10,15 +10,23 @@ function playGame() {
         // GET player's choice via Prompt
         let humanChoice = prompt("Please enter your choice: Rock, Paper, or Scissors:").toLowerCase();
 
-        // CHECK if valid, if not, EXIT round
+        // CONVERT humanChoices to numerical values
         let choices = ["rock", "paper", "scissors"];
         humanChoice = choices.indexOf(humanChoice);
+
+        // CHECK if valid, if not, EXIT round
         if (humanChoice === -1) {
             console.log("Invalid Response. My instructions were very simple. Do not test me. Refresh the page and enter Rock, Paper, or Scissors.");
             return; // Exit round if the input is invalid
         }
+        console.log(humanChoice)
 
-        // GET computer's random choice 
+        // GET computer's random choice
+        function getComputerChoice() {
+            return Math.floor(Math.random() * 3); // Random number between 0 and 2
+        }
+        const computerChoice = getComputerChoice();
+        console.log(computerChoice)
 
         // CALCULATE round result
 
