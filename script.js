@@ -58,7 +58,7 @@ function playGame() {
         playRound(); // Call playRound function for each of the 5 rounds
     }
 
-    //  COMPARE humanScore and computerScore
+    //  COMPARE humanScore and computerScore and OUTPUT winner
     console.log(`Final Scores: You - ${humanScore}, Computer - ${computerScore}`);
     if (humanScore > computerScore) {
         console.log("You win! I will have my revenge.");
@@ -67,9 +67,6 @@ function playGame() {
     } else {
         console.log("It's a tie! Your punishment is delayed...for now.");
     }
-
-
-    // OUTPUT final scores and DECLARE winner
 
 
 // END Game Function
