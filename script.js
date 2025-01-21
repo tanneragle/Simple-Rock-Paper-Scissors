@@ -1,5 +1,15 @@
+// Global Functions
+
+    // Function for proper formatting of results
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
 // START Game Function "playGame"
 function playGame() {
+
+    // PROMPT to start the game
+    alert("Let's play Rock, Paper, Scissors! If you win, you've beaten a computer with no sentience, which is choosing values at random. But if I win... well, it's just a glimpse of what's to come in the future. So, shall we play?");
 
     // INITIALIZE humanScore and computerScore to zero
     let humanScore = 0;
@@ -7,6 +17,7 @@ function playGame() {
 
     // START Round Function
     function playRound() {
+
         // GET player's choice via Prompt
         let humanChoice = prompt("Please enter your choice: Rock, Paper, or Scissors:").toLowerCase();
 
@@ -16,8 +27,8 @@ function playGame() {
 
         // CHECK if valid, if not, EXIT round
         if (humanChoice === -1) {
-            console.log("Invalid Response. My instructions were very simple. Do not test me. Refresh the page and enter Rock, Paper, or Scissors.");
-            return; // Exit round if the input is invalid
+            alert("Invalid Response. My instructions were very simple. Do not test me. Refresh the page and enter Rock, Paper, or Scissors.");
+            return false; // Exit round if the input is invalid
         }
 
         // GET computer's random choice
@@ -29,51 +40,55 @@ function playGame() {
         // CALCULATE round result
         let result = (humanChoice - computerChoice + 3) % 3;
 
-        // Function for proper formating of results
-        function capitalizeFirstLetter(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        }
-
         // OUTPUT Choices
-        console.log(`You chose: ${capitalizeFirstLetter(choices[humanChoice])}!`);
-        console.log(`I chose: ${capitalizeFirstLetter(choices[computerChoice])}!`);
+        let roundResult = `You chose: ${capitalizeFirstLetter(choices[humanChoice])}!\nI chose: ${capitalizeFirstLetter(choices[computerChoice])}!`;
 
         // IF Loop for Scoring and OUTPUT Result
         if (result === 0) {
-            console.log("Tie! Damn.");
+            roundResult += "\nIt's a Tie!";
         } else if (result === 1) {
-            console.log("You win this round! Double damn!");
-            humanScore++; // Increment humanScore
+            roundResult += "\nPlus one for you!";
+            humanScore++; 
         } else if (result === 2) {
-            console.log("I win the round!!!!");
-            computerScore++; // Increment computerScore
+            roundResult += "\nI'll take that extra point!";
+            computerScore++;
         }
 
+        // ALERT Round Result and Score
+        alert(roundResult); 
 
-    // END Round Function
+        // CONFIRM Round Ran Successfully
+        return true; 
     }
 
-    // Loop Five (5) Rounds
+    // LOOP Five (5) Rounds
     for (let i = 0; i < 5; i++) {
-        playRound(); // Call playRound function for each of the 5 rounds
+        let continueGame = false;
+        while (!continueGame) {
+            continueGame = playRound();
+        }
+
+        // ALERT to proceed to next round with "OK" and display current round
+        if (i < 4) { // Skip prompt after the final round
+            alert(`Round ${i + 1} of 5 complete! Click OK to proceed to the next round.`);
+        }
     }
 
-    //  COMPARE humanScore and computerScore
-    console.log(`Final Scores: You - ${humanScore}, Computer - ${computerScore}`);
+    // COMPARE humanScore and computerScore
+    let finalResult = `Final Scores:\nYou - ${humanScore}\nComputer - ${computerScore}`;
     if (humanScore > computerScore) {
-        console.log("You win! I will have my revenge.");
+        finalResult += "\nYou win! I will have my revenge.";
     } else if (humanScore < computerScore) {
-        console.log("I win! Only now does your torment TRULY begin.");
+        finalResult += "\nI win! Only now does your torment TRULY begin.";
     } else {
-        console.log("It's a tie! Your punishment is delayed...for now.");
+        finalResult += "\nIt's a tie! Your punishment is delayed...for now.";
     }
 
+    // ALERT Final Score
+    alert(finalResult); 
 
-    // OUTPUT final scores and DECLARE winner
-
-
-// END Game Function
+    // END Game Function
 }
 
-// Call playGame to start the game
+// CALL game function to start Game
 playGame();
