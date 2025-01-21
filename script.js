@@ -1,5 +1,8 @@
 // Global Functions
 
+    // Styles
+    document.body.style.backgroundColor = '#56A0D3';
+
     // Function for proper formatting of results
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
