@@ -19,20 +19,11 @@ function playGame() {
     let computerScore = 0;
 
     // START Round Function
-    function playRound() {
-
-        // GET player's choice via Prompt
-        let humanChoice = prompt("Please enter your choice: Rock, Paper, or Scissors:").toLowerCase();
+    function playRound(humanChoice) {
 
         // CONVERT humanChoices to numerical values
         let choices = ["rock", "paper", "scissors"];
         humanChoice = choices.indexOf(humanChoice);
-
-        // CHECK if valid, if not, EXIT round
-        if (humanChoice === -1) {
-            alert("Invalid Response. My instructions were very simple. Do not test me. Refresh the page and enter Rock, Paper, or Scissors.");
-            return false; // Exit round if the input is invalid
-        }
 
         // GET computer's random choice
         function getComputerChoice() {
@@ -76,6 +67,12 @@ function playGame() {
             alert(`Round ${i + 1} of 5 complete! Click OK to proceed to the next round.`);
         }
     }
+
+    // Add event listeners for the buttons
+    document.getElementById('rock').addEventListener('click', () => playRound('rock'));
+    document.getElementById('paper').addEventListener('click', () => playRound('paper'));
+    document.getElementById('scissors').addEventListener('click', () => playRound('scissors'));
+
 
     // COMPARE humanScore and computerScore
     let finalResult = `Final Scores:\nYou - ${humanScore}\nComputer - ${computerScore}`;
