@@ -8,87 +8,52 @@
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
 
-// START Game Function "playGame"
-function playGame() {
+// Initialize global variables for scores and round count
+let humanScore = 0;
+let computerScore = 0;
+let roundCount = 0;
 
-    // PROMPT to start the game
-    alert("Let's play Rock, Paper, Scissors! If you win, you've beaten a computer with no sentience, which is choosing values at random. But if I win... well, it's just a glimpse of what's to come in the future. So, shall we play?");
+// Function for a single round of the game
+function playRound(humanChoice) {
+    const choices = ["rock", "paper", "scissors"];
+    const computerChoice = Math.floor(Math.random() * 3); // Get computer's random choice
 
-    // INITIALIZE humanScore and computerScore to zero
-    let humanScore = 0;
-    let computerScore = 0;
+    // Calculate result
+    const result = (choices.indexOf(humanChoice) - computerChoice + 3) % 3;
+    let roundResult = `You chose: ${capitalizeFirstLetter(humanChoice)}.\nI chose: ${capitalizeFirstLetter(choices[computerChoice])}.`;
 
-    // START Round Function
-    function playRound(humanChoice) {
-
-        // CONVERT humanChoices to numerical values
-        let choices = ["rock", "paper", "scissors"];
-        humanChoice = choices.indexOf(humanChoice);
-
-        // GET computer's random choice
-        function getComputerChoice() {
-            return Math.floor(Math.random() * 3); // Random number between 0 and 2
-        }
-        const computerChoice = getComputerChoice();
-
-        // CALCULATE round result
-        let result = (humanChoice - computerChoice + 3) % 3;
-
-        // OUTPUT Choices
-        let roundResult = `You chose: ${capitalizeFirstLetter(choices[humanChoice])}!\nI chose: ${capitalizeFirstLetter(choices[computerChoice])}!`;
-
-        // IF Loop for Scoring and OUTPUT Result
-        if (result === 0) {
-            roundResult += "\nIt's a Tie!";
-        } else if (result === 1) {
-            roundResult += "\nPlus one for you!";
-            humanScore++; 
-        } else if (result === 2) {
-            roundResult += "\nI'll take that extra point!";
-            computerScore++;
-        }
-
-        // ALERT Round Result and Score
-        alert(roundResult); 
-
-        // CONFIRM Round Ran Successfully
-        return true; 
-    }
-
-    // LOOP Five (5) Rounds
-    for (let i = 0; i < 5; i++) {
-        let continueGame = false;
-        while (!continueGame) {
-            continueGame = playRound();
-        }
-
-        // ALERT to proceed to next round with "OK" and display current round
-        if (i < 4) { // Skip prompt after the final round
-            alert(`Round ${i + 1} of 5 complete! Click OK to proceed to the next round.`);
-        }
-    }
-
-    // Add event listeners for the buttons
-    document.getElementById('rock').addEventListener('click', () => playRound('rock'));
-    document.getElementById('paper').addEventListener('click', () => playRound('paper'));
-    document.getElementById('scissors').addEventListener('click', () => playRound('scissors'));
-
-
-    // COMPARE humanScore and computerScore
-    let finalResult = `Final Scores:\nYou - ${humanScore}\nComputer - ${computerScore}`;
-    if (humanScore > computerScore) {
-        finalResult += "\nYou win! I will have my revenge.";
-    } else if (humanScore < computerScore) {
-        finalResult += "\nI win! Only now does your torment TRULY begin.";
+    if (result === 0) {
+        roundResult += " It's a tie!";
+    } else if (result === 1) {
+        roundResult += " You win this round!";
+        humanScore++;
     } else {
-        finalResult += "\nIt's a tie! Your punishment is delayed...for now.";
+        roundResult += " I'll take that extra point!";
+        computerScore++;
     }
 
-    // ALERT Final Score
-    alert(finalResult); 
+    // Update DOM with results
+    document.getElementById("round-result").textContent = roundResult;
+    document.getElementById("scores").textContent = `Scores: You - ${humanScore} | Computer - ${computerScore}`;
+    roundCount++;
 
-    // END Game Function
+    // Check if 5 rounds are complete
+    if (roundCount === 5) {
+        let finalResult = humanScore > computerScore
+            ? "You win the game! I will have my revenge."
+            : humanScore < computerScore
+            ? "I win the game! Only now does your torment TRULY begin."
+            : "It's a tie! Your punishment is delayed... for now.";
+
+        // Show final result and reset game
+        document.getElementById("round-result").textContent = finalResult;
+        humanScore = 0;
+        computerScore = 0;
+        roundCount = 0; // Reset round count for a new game
+    }
 }
 
-// CALL game function to start Game
-playGame();
+// Add event listeners for buttons
+document.getElementById('rock').addEventListener('click', () => playRound('rock'));
+document.getElementById('paper').addEventListener('click', () => playRound('paper'));
+document.getElementById('scissors').addEventListener('click', () => playRound('scissors'));
