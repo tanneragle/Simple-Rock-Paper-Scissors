@@ -1,4 +1,45 @@
+/* Style the body */
 body {
-    color: white; /* White Text for Contrast */
-    font-family: Arial, sans-serif; /* Clean Font */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    background-color: #56A0D3;
+   
+}
+
+/* Style the buttons container and keep it fixed at the top */
+#buttons {
+    display: flex;
+    gap: 20px;
+    position: fixed; /* Fixes the buttons in place */
+    top: 100px; /* Position buttons near the top of the screen */
+    left: 50%; /* Centers the buttons horizontally */
+    transform: translateX(-50%); /* Ensure it's centered */
+}
+
+/* Style each button */
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #ddd;
+}
+
+/* Style the results section */
+#results {
+    font-size: 24px;
+    font-weight: bold;
+    min-height: 60px; /* Ensures space for text, prevents jumping */
 }

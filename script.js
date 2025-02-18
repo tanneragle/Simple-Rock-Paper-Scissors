@@ -1,7 +1,3 @@
-
-// Styles
-document.body.style.backgroundColor = '#56A0D3';
-
 // Proper Formatting of Results
 function capitalizeFirstLetter(str) {
 return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -27,7 +23,7 @@ function playRound(humanChoice) {
     } else {
         roundResult += " I'll take that extra point!";
         computerScore++;
-    }
+    }``
 
     
     document.getElementById("round-result").textContent = roundResult;
